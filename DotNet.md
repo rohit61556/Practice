@@ -11,9 +11,9 @@ It supports different languages like C#, Cobol, VB, Perl, etc.
 
 | No. | Feature |
 | --- | --------- |
-|   | **ES2015 Or ES6** |
+
 |1  | [Main components of .NET framework](#Main-components) |
-|2  | [Arrow functions](#arrow-functions) |
+|2  | [How does the .NET framework work?](#framewrok-work) |
 |3  | [Classes](#classes) |
 |4  | [Enhanced object literals](#Enhanced-object-literals) |
 |5  | [Template literals](#template-literals) |
@@ -81,56 +81,16 @@ It supports different languages like C#, Cobol, VB, Perl, etc.
       **Framework Class Library**- It has pre-defined methods and properties to implement common and complex functions that can be used by .NET applications.
 
 
-2. ### Arrow functions
+2. ### Framework work
 
-    The arrow functions provides a more concise syntax for writing function expressions by opting out the function and return keywords using fat arrow(=>) notation. Let's see how this arrow function looks like,
-
-    ```js
-    // Function Expression
-    var multiplyFunc = function(a, b) {
-        return a * b;
-    }
-    console.log(multiplyFunc(2, 5)); // 10
-
-    // Arrow function
-    var multiplyArrowFunc = (a, b) => a * b;
-    console.log(multiplyArrowFunc(2, 5)); // 10
-    ```
-    You can also skip parenthesis(()) if the function has exactly one parameter(either zero or more than one parameter). Apart from this, you can wrap braces({}) if the function has more than one expression in the body.
-
-    Let's list down all the variations of arrow functions,
-    ```js
-    //1. Single parameter and single statement
-    var message = name => console.log("Hello, " + name + "!");
-    message("Sudheer"); // Hello, Sudheer!
-
-    //2. Multiple parameters and single statement
-    var multiply = (x, y) => x * y;
-    console.log(multiply(2, 5)); // 10
+    .NET framework-based applications that are written in supportive languages like C#, F#, or Visual basic are compiled to Common Intermediate Language (CIL).
+    Compiled code is stored in the form of an assembly file that has a .dll or .exe file extension.
+    When the .NET application runs, Common Language Runtime (CLR) takes the assembly file and converts the CIL into machine code with the help of the Just In Time(JIT)             compiler.
+    Now, this machine code can execute on the specific architecture of the computer it is running on.
+    
+    ![image](https://user-images.githubusercontent.com/38435793/124603211-50a6ec00-de87-11eb-8e02-cb41b9e1c499.png)
 
 
-    //3. Single parameter and multiple statements
-    var even = number => {
-        if(number%2) {
-            console.log("Even");
-        } else {
-            console.log("Odd");
-        }
-    }
-    even(5); // odd
-
-    //4. Multiple parameters and multiple statements
-    var divide = (x, y) => {
-        if(y != 0) {
-            return x / y;
-        }
-    }
-    console.log(divide(100, 5)); // 20
-
-    //5. No parameter and single statement
-    var greet = () => console.log('Hello World!');
-    greet(); // Hello World!
-    ```
 
 3. ### Classes
     The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.
