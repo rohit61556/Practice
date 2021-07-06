@@ -11,13 +11,12 @@ It supports different languages like C#, Cobol, VB, Perl, etc.
 
 | No. | Feature |
 | --- | --------- |
-
 |1  | [Main components of .NET framework](#Main-components) |
 |2  | [How does the .NET framework work?](#framewrok-work) |
-|3  | [Classes](#classes) |
-|4  | [Enhanced object literals](#Enhanced-object-literals) |
-|5  | [Template literals](#template-literals) |
-|6  | [Destructuring](#destructuring) |
+|3  | [What is CTS?](#cts) |
+|4  | [Explain CLS](#cls) |
+|5  | [What is JIT?](#jit) |
+|6  | [What is the difference between int and Int32?](#int32) |
 |7  | [Default parameters](#default-parameters) |
 |8  | [Rest parameter](#rest-parameter) |
 |9  | [Spread Operator](#spread-operator) |
@@ -73,7 +72,7 @@ It supports different languages like C#, Cobol, VB, Perl, etc.
 
 ## ES2015 Or ES6
 
-1. ### Main Components
+1. ### Main components of .NET framework
 
     .NET framework consists of 2 main components. They are:
 
@@ -81,7 +80,7 @@ It supports different languages like C#, Cobol, VB, Perl, etc.
       **Framework Class Library**- It has pre-defined methods and properties to implement common and complex functions that can be used by .NET applications.
 
 
-2. ### Framework work
+2. ### How does the .NET framework work?
 
     .NET framework-based applications that are written in supportive languages like C#, F#, or Visual basic are compiled to Common Intermediate Language (CIL).
     Compiled code is stored in the form of an assembly file that has a .dll or .exe file extension.
@@ -92,211 +91,19 @@ It supports different languages like C#, Cobol, VB, Perl, etc.
 
 
 
-3. ### Classes
-    The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.
+3. ### What is CTS?
+    CTS stands for Common Type System. It follows a set of structured rules according to which a data type should be declared and used in the program code. It is used to           describe all the data types that are going to be used in the application.
 
-    There are two ways to define classes,
+    We can create our own classes and functions by following the rules in the CTS. It helps in calling the data type declared in one programming language by other programming       languages.
 
-    1. **Class declarations:**
+4. ### Explain CLS
+    **Common Language Specification (CLS)** helps the application developers to use the components that are inter-language compatible with certain rules that come with CLS. It also helps in reusing the code among all of the .NET-compatible languages.
 
-    ```js
-    class Square {
-      constructor(length) {
-        this.length = length;
-      }
-
-      get area() {
-        return this.length * this.length;
-      }
-
-      set area(value) {
-        this.area = value;
-      }
-    }
-    ```
-
-    2. **Class expressions:**
-
-    ```js
-    const square = class Square {
-      constructor(length) {
-        this.length = length;
-      }
-
-      get area() {
-        return this.length * this.length;
-      }
-
-      set area(value) {
-        this.area = value;
-      }
-    }
-    ```
-
-    You can use **extend** keyword to use inheritance. This enables the subclass to get all features of a parent class.
-
-    ```js
-    class Vehicle {
-      constructor(name) {
-        this.name = name;
-      }
-
-      start() {
-        console.log(`${this.name} vehicle started`);
-      }
-    }
-
-    class Car extends Vehicle {
-      start() {
-        console.log(`${this.name} car started`);
-      }
-    }
-
-    const car = new Car('BMW');
-    console.log(car.start()); // BMW car started
-    ```
-
-    **Note:** Even though ES6 classes looks similar to classes in other object oriented languages, such as Java, PHP, etc but they do not work exactly the same way.
-
-4. ### Enhanced object literals
-
-    Object literals are extended to support setting the prototype at construction, shorthand for foo: foo assignments, defining methods, making super calls, and computing property names with expressions.
-
-    The important enhancements of object literals are,
-
-    1. **Property Shorthand:**
-
-    Object's properties are often created from variables with the same name.
-
-    Let's see the ES5 representation
-
-    ```js
-    var a = 1, b = 2, c = 3;
-      obj = {
-        a: a,
-        b: b,
-        c: c
-      };
-      console.log(obj);
-    ```
-    and it can be represented in a shorter syntax as below,
-
-    ```js
-    var a = 1, b = 2, c = 3;
-      obj = {
-        a,
-        b,
-        c
-      };
-      console.log(obj);
-    ```
-
-    2. **Method Shorthand:**
-    In ES5, Object methods require the function statement as below,
-
-    ```js
-    var calculation = {
-      sum:  function(a, b) { return a + b; },
-      multiply: function(a, b) { return a * b; }
-    };
-
-    console.log( calculation.add(5, 3) );  // 15
-    console.log( calculation.multiply(5, 3) ); // 15
-    ```
-
-    This can be avoided in ES6,
-
-    ```js
-    var calculation = {
-      sum(a, b) { return a + b; },
-      multiply(a, b) { return a * b; }
-    };
-
-    console.log( calculation.add(5, 3) );  // 15
-    console.log( calculation.multiply(5, 3) ); // 15
-    ```
-
-    3. **Computed Property Names:**
-    In ES5, it wasn’t possible to use a variable for a key name during object creation stage.
-
-    ```js
-    var
-      key = 'three',
-      obj = {
-        one: 1,
-        two: 2
-      };
-
-    obj[key] = 3;
-    ```
-
-    Object keys can be dynamically assigned in ES6 by placing an expression in square brackets([])
-
-    ```js
-    const
-      key = 'three',
-      computedObj = {
-        one: 1,
-        two: 2,
-        [key]: 3
-      };
-    ```
-
-5. ### Template literals
-    Prior to ES6, JavaScript developers would need to do ugly string concatenation to creat dynamic strings.
-
-    Template literals allows you to work with strings in a new way compared to ES5. These are just string literals allowing embedded expressions denoted by the dollar sign and curly braces (${expression}). Also, these literals are enclosed by the backtick (` `) character instead of double or single quotes.
-
-    ES6 has two new kinds of literals:
-
-    1. **Template literals:** string literals which exists across multiple lines and include interpolated expressions(i.e, ${expression})
-
-    ```js
-    const firstName = 'John';
-    console.log(`Hello ${firstName}!
-    Good morning!`);
-    ```
-
-    2. **Tagged template literals:** Function calls which are created by mentioning a function before a template literal.
-
-    The real world use case is creating components in CSS-In-JS styled components to use across the application
-
-    ```js
-    const Button = styled.a`
-      display: inline-block;
-      border-radius: 3px;
-    `
-    ```
-
-6. ### Destructuring
-
-    Destructuring is a javascript expression for extracting multiple values from data stored in objects(properties of an object) and Arrays.
-
-    **Object destructuring:**
-
-    This feature is used to extract values from an object.
-
-    ```js
-    const user = { firstName: 'John', lastName: 'Kary' };
-    const {firstName, lastName} = user;
-    console.log(firstName, lastName); // John, Kary
-    ```
-
-    **Array destructuring:**
-
-    This feature is used to extract values from an array.
-
-    ```js
-    const [one, two, three] = ['one', 'two', 'three'];
-    console.log(one, two, three); // one, two, three
-    ```
-
-    You can use destructing in below places,
-
-    1. Variable declarations
-    2. Assignments
-    3. Parameter definitions
-    4. for-of loop
+5. ### What is JIT?
+    JIT stands for Just In Time. It is a compiler that converts the intermediate code into the native language during the execution.
+    
+6. ### What is the difference between int and Int32?
+There is no difference between int and Int32. Int32 is a type provided by the .NET framework class whereas int is an alias name for Int32 in the C# programming language.
 
 7. ### Default parameters
 
